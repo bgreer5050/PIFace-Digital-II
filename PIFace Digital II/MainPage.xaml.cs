@@ -105,7 +105,7 @@ namespace PIFace_Digital_II
         {
             MCP23S17.WritePin(PFDII.RelayA , On);
             RelayAImage.Source =  RelayOn.Source;
-            LED1.IsChecked = true; ;
+            LED1.IsChecked = true; 
         }
 
         private void RelayB_Checked(object sender, RoutedEventArgs e)
@@ -128,6 +128,11 @@ namespace PIFace_Digital_II
             RelayBImage.Source = RelayOff.Source;
             LED0.IsChecked = false; ;
         }
+
+
+
+
+
 
         private void LED0_Checked(object sender, RoutedEventArgs e)
         {
@@ -250,6 +255,20 @@ namespace PIFace_Digital_II
         {
             Switch3.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Black);
         }
+
+        //***********************************************************************************
+        //*****************                 RELAYS                               ************
+        //***********************************************************************************
+        public void RelayAOn()
+        {
+            MCP23S17.WritePin(PFDII.RelayA, On);
+
+        }
+
+
+
+
+
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
