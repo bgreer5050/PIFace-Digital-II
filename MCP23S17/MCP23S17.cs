@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Spi;
 using Windows.Devices.Enumeration;
+using System.Diagnostics;
 
 namespace SPI_GPIO
 {
@@ -94,6 +95,7 @@ namespace SPI_GPIO
             writeBuffer3[2] = value;
             try
             {
+                
                 SpiGPIO.Write(writeBuffer3);
             }
 
@@ -113,10 +115,11 @@ namespace SPI_GPIO
             {
                 SpiGPIO.Write(writeBuffer4);
             }
-
+         
             /* If initialization fails, display the exception and stop running */
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
                 //statusText.Text = "\nFailed to Wrie to DAC";
             }
         }
