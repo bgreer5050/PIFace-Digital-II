@@ -103,7 +103,7 @@ namespace PIFace_Digital_II
         //Note RelayA = R1, RelayB = R0
         private void RelayA_Checked(object sender, RoutedEventArgs e)
         {
-            MCP23S17.WritePin(PFDII.RelayB , On);
+            MCP23S17.WritePin(PFDII.RelayA , On);
             RelayAImage.Source =  RelayOn.Source;
             LED1.IsChecked = true; 
         }
@@ -117,7 +117,7 @@ namespace PIFace_Digital_II
 
         private void RelayA_Unchecked(object sender, RoutedEventArgs e)
         {
-            MCP23S17.WritePin(PFDII.RelayB, Off);
+            MCP23S17.WritePin(PFDII.RelayA, Off);
             RelayAImage.Source = RelayOff.Source;
             LED1.IsChecked = false; ;
         }
