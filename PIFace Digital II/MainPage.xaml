@@ -5,7 +5,7 @@
     xmlns:local="using:PIFace_Digital_II"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Width="1680" Height="1050" >
+    mc:Ignorable="d" Width="1680" Height="1050">
 
     <Grid Background="White" BorderBrush="#FF0093B9" BorderThickness="10" CornerRadius="50"  >
         <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="98" Margin="945,40,0,0" VerticalAlignment="Top" Width="507" CornerRadius="5"/>

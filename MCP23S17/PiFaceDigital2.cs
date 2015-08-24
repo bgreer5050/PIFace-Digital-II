@@ -31,7 +31,11 @@ namespace SPI_GPIO
         public const byte Sw2 = IN2;     // MCP23x17 Input Polarity Register
         public const byte Sw3 = IN3;     // 0 = Normal (default)(low reads as 0), 1 = Inverted (low reads as 1)
 
+
+
         public const byte RelayA = LED1;     // MCP23x17 Input Polarity Register
         public const byte RelayB = LED0;     // 0 = Normal (default)(low reads as 0), 1 = Inverted (low reads as 1)
+
+        
     }
 }

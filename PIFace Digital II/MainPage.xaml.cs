@@ -14,8 +14,14 @@ namespace PIFace_Digital_II
     public sealed partial class MainPage : Page
     {
         private DispatcherTimer timer;         // create a timer
+
+        private DispatcherTimer timerOutputs;
+
         private const byte Off = MCP23S17.Off;
         private const byte On = MCP23S17.On;
+
+        int OnFlag = 0;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -38,7 +44,36 @@ namespace PIFace_Digital_II
             timer.Interval = TimeSpan.FromMilliseconds(200); //sample every 200mS
             timer.Tick += Timer_Tick;
             timer.Start();
+
+
+            timerOutputs = new DispatcherTimer();
+            timerOutputs.Interval = TimeSpan.FromMilliseconds(5000);
+            timerOutputs.Tick += TimerOutputs_Tick;
+            timerOutputs.Start();
+
+           
         }
+
+        private void TimerOutputs_Tick(object sender, object e)
+        {
+           if(OnFlag==0)
+            {
+                MCP23S17.pullupMode(PFDII.LED2, Off);
+                
+                MCP23S17.WritePin(PFDII.LED2, On);
+                MCP23S17.WritePin(PFDII.LED3, On);
+                MCP23S17.WritePin(PFDII.LED4, On);
+                OnFlag = 1;
+            }
+           else
+            {
+                MCP23S17.WritePin(PFDII.LED2, Off);
+                MCP23S17.WritePin(PFDII.LED3, Off);
+                MCP23S17.WritePin(PFDII.LED4, Off);
+                OnFlag = 0;
+            }
+        }
+
         // read GPIO and display it
         private void Timer_Tick(object sender, object e)
         {
@@ -56,6 +91,9 @@ namespace PIFace_Digital_II
                 MCP23S17.setPinMode(0x00FF); // 0x0000 = all outputs, 0xffff=all inputs, 0x00FF is PIFace Default
                 MCP23S17.pullupMode(0x00FF); // 0x0000 = no pullups, 0xffff=all pullups, 0x00FF is PIFace Default
                 MCP23S17.WriteWord(0x0000); // 0x0000 = no pullups, 0xffff=all pullups, 0x00FF is PIFace Default
+
+               
+
                 Switch0.AddHandler(PointerPressedEvent, new PointerEventHandler(Switch0_PointerPressed), true);
                 Switch0.AddHandler(PointerReleasedEvent, new PointerEventHandler(Switch0_PointerReleased), true);
                 Switch1.AddHandler(PointerPressedEvent, new PointerEventHandler(Switch1_PointerPressed), true);
@@ -64,6 +102,9 @@ namespace PIFace_Digital_II
                 Switch2.AddHandler(PointerReleasedEvent, new PointerEventHandler(Switch2_PointerReleased), true);
                 Switch3.AddHandler(PointerPressedEvent, new PointerEventHandler(Switch3_PointerPressed), true);
                 Switch3.AddHandler(PointerReleasedEvent, new PointerEventHandler(Switch3_PointerReleased), true);
+
+
+                
 
                 initTimer();
             }
@@ -120,6 +161,8 @@ namespace PIFace_Digital_II
             MCP23S17.WritePin(PFDII.RelayA, Off);
             RelayAImage.Source = RelayOff.Source;
             LED1.IsChecked = false; ;
+
+            
         }
 
         private void RelayB_Unchecked(object sender, RoutedEventArgs e)
@@ -133,6 +176,9 @@ namespace PIFace_Digital_II
         {
             MCP23S17.WritePin(PFDII.LED0, On);
             RelayB.IsChecked = true; // LED0 and RelayA are the same output pin
+
+           
+
         }
 
         private void LED1_Checked(object sender, RoutedEventArgs e)
