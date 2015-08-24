@@ -129,11 +129,6 @@ namespace PIFace_Digital_II
             LED0.IsChecked = false; ;
         }
 
-
-
-
-
-
         private void LED0_Checked(object sender, RoutedEventArgs e)
         {
             MCP23S17.WritePin(PFDII.LED0, On);
